@@ -1,68 +1,49 @@
 # SmartMaterial
 
-A lightweight, dependency-free Material 3 inspired Android UI library built in Java.
+A small, dependency-free Material 3 inspired Android UI library written in Java.
 
-## Highlights
-- Java and Android framework APIs only
-- No Google Material Components dependency
-- AndroidX compatible
+The first release deliberately contains only a few stable components. The goal is reliability, simple APIs and easy use from Android Studio and Sketchware-style Java code.
+
+## Requirements
+
+- Java
 - minSdk 23
-- Material-inspired color, typography, shape, elevation and motion utilities
-- Core controls, progress indicators, feedback, search and navigation components
-- Light/dark color tokens
-- XML styleable attributes
-- Ripple and accessibility helpers
-
-## Installation
-
-JitPack:
-
-```gradle
-repositories {
-    maven { url = uri("https://jitpack.io") }
-}
-
-dependencies {
-    implementation("com.github.smarthubafrika:SmartMaterial:1.0.0")
-}
-```
-
-## Java
-
-```java
-SmartButton button = new SmartButton(this)
-        .setButtonText("Continue");
-
-SmartTextField name = new SmartTextField(this)
-        .setLabel("Name")
-        .setHint("Enter your name");
-
-SmartCard card = new SmartCard(this);
-```
-
-## Theme helpers
-
-```java
-int surface = SmartTheme.surface(context);
-int primary = SmartTheme.primary(context);
-boolean dark = SmartTheme.isDark(context);
-
-SmartState.applyRipple(view, SmartColors.PRIMARY, SmartColors.PRIMARY_CONTAINER);
-SmartState.accessible(view, "Open settings");
-```
-
-
-## Documentation
-
-For the complete installation instructions, component reference, public API examples, theming, accessibility, XML usage, troubleshooting and usage patterns, see the [SmartMaterial User Guide](docs/USER_GUIDE.md).
+- No Google Material Components dependency
+- Android framework APIs only
 
 ## Components
 
-Buttons, icon buttons, cards, text fields, chips, switches, checkboxes, radio buttons, sliders, dropdowns, search bars, badges, progress indicators, dialogs, snackbar, toast, bottom sheets, app bars, navigation bars, navigation rails and FABs are included.
+- SmartButton
+- SmartCard
+- SmartTextField
+- SmartProgress
+- SmartSnackbar
+- SmartColors and SmartTheme utilities
 
-## Design philosophy
+## Quick example
 
-SmartMaterial is Material 3 inspired, not a copy of Google's Material Components. The library uses Android framework APIs and keeps the dependency surface small.
+    SmartButton button = new SmartButton(this).setButtonText("Continue");
+    button.setOnClickListener(v -> SmartSnackbar.show(v, "Button clicked"));
+
+    SmartTextField name = new SmartTextField(this)
+            .setLabel("Name")
+            .setHint("Enter your name");
+
+    String value = name.getText();
+
+## JitPack
+
+    repositories {
+        maven { url = uri("https://jitpack.io") }
+    }
+
+    dependencies {
+        implementation("com.github.smarthubafrika:SmartMaterial:1.0.0")
+    }
+
+## Design goal
+
+SmartMaterial is Material 3 inspired, not a copy of Google's Material Components. It uses Android framework APIs and keeps the dependency surface small.
 
 ## License
 
