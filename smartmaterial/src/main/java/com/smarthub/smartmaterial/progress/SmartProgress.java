@@ -14,6 +14,7 @@ public class SmartProgress extends View {
     private float progress = 0.65f;
     private boolean indeterminate;
     private float rotation;
+
     private final Runnable animator = new Runnable() {
         @Override public void run() {
             rotation += 8f;
@@ -23,17 +24,26 @@ public class SmartProgress extends View {
         }
     };
 
-    public SmartProgress(Context context) { super(context); init(); }
-    public SmartProgress(Context context, AttributeSet attrs) { super(context, attrs); init(); }
+    public SmartProgress(Context context) {
+        super(context);
+        init();
+    }
+
+    public SmartProgress(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
     public SmartProgress(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr); init();
+        super(context, attrs, defStyleAttr);
+        init();
     }
 
     private void init() {
         paint.setStrokeWidth(dp(4));
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        setMinimumHeight(dpInt(24));
+        setMinimumHeight(Math.round(dp(24)));
     }
 
     public SmartProgress setProgress(float value) {
@@ -66,28 +76,40 @@ public class SmartProgress extends View {
         super.onDetachedFromWindow();
     }
 
-    private void stopAnimation() { removeCallbacks(animator); }
+    private void stopAnimation() {
+        removeCallbacks(animator);
+    }
 
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         float cx = getWidth() / 2f;
         float cy = getHeight() / 2f;
-        float radius = Math.max(2f, Math.min(getWidth(), getHeight()) / 2f - dp(6));
-        RectF rect = new RectF(cx - radius, cy - radius, cx + radius, cy + radius);
+        float radius = Math.max(
+                2f,
+                Math.min(getWidth(), getHeight()) / 2f - dp(6)
+        );
+
+        RectF rect = new RectF(
+                cx - radius,
+                cy - radius,
+                cx + radius,
+                cy + radius
+        );
 
         paint.setColor(0x332F4B7C);
         canvas.drawArc(rect, 0, 360, false, paint);
 
         paint.setColor(SmartTheme.primary(getContext()));
-        if (indeterminate) canvas.drawArc(rect, rotation, 105, false, paint);
-        else canvas.drawArc(rect, -90, 360f * progress, false, paint);
+
+        if (indeterminate) {
+            canvas.drawArc(rect, rotation, 105, false, paint);
+        } else {
+            canvas.drawArc(rect, -90, 360f * progress, false, paint);
+        }
     }
 
     private float dp(float value) {
         return value * getResources().getDisplayMetrics().density;
-    }
-
-    private int dpInt(float value) {
-        return Math.round(dp(value));
     }
 }
