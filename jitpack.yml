@@ -1,2 +1,8 @@
 jdk:
   - openjdk17
+
+gradle:
+  wrapper: true
+
+install:
+  - gradle clean build publishToMavenLocal
