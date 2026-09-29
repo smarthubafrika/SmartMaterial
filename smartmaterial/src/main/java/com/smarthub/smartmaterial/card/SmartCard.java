@@ -1,53 +1,10 @@
 package com.smarthub.smartmaterial.card;
-
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.GradientDrawable;
-import android.util.AttributeSet;
-import android.widget.FrameLayout;
-
-import com.smarthub.smartmaterial.R;
-import com.smarthub.smartmaterial.theme.SmartColors;
-import com.smarthub.smartmaterial.theme.SmartDimensions;
-
-public class SmartCard extends FrameLayout {
-    private int cardColor = SmartColors.SURFACE;
-    private int strokeColor = SmartColors.OUTLINE;
-    private float cornerRadius = SmartDimensions.CORNER_LARGE;
-    private float strokeWidth = 1f;
-
-    public SmartCard(Context context) { super(context); init(null); }
-    public SmartCard(Context context, AttributeSet attrs) { super(context, attrs); init(attrs); }
-    public SmartCard(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); init(attrs); }
-
-    private void init(AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SmartCard);
-            cardColor = a.getColor(R.styleable.SmartCard_smartCardColor, cardColor);
-            strokeColor = a.getColor(R.styleable.SmartCard_smartStrokeColor, strokeColor);
-            strokeWidth = a.getDimension(R.styleable.SmartCard_smartStrokeWidth, dp(strokeWidth)) / getResources().getDisplayMetrics().density;
-            setElevation(a.getDimension(R.styleable.SmartCard_smartElevation, dp(SmartDimensions.CARD_ELEVATION)));
-            a.recycle();
-        } else {
-            setElevation(dp(SmartDimensions.CARD_ELEVATION));
-        }
-        setPadding(dp(16), dp(16), dp(16), dp(16));
-        updateBackground();
-    }
-
-    private int dp(float v) { return SmartDimensions.dp(getContext(), v); }
-
-    private void updateBackground() {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(cardColor);
-        drawable.setCornerRadius(dp(cornerRadius));
-        drawable.setStroke(dp(strokeWidth), strokeColor);
-        setBackground(drawable);
-    }
-
-    public SmartCard setCardColor(int color) { cardColor = color; updateBackground(); return this; }
-    public SmartCard setStrokeColor(int color) { strokeColor = color; updateBackground(); return this; }
-    public SmartCard setStrokeWidth(float dp) { strokeWidth = dp; updateBackground(); return this; }
-    public SmartCard setCornerRadius(float dp) { cornerRadius = dp; updateBackground(); return this; }
-    public SmartCard setCardElevation(float dp) { setElevation(dp(dp)); return this; }
+import android.content.*;import android.content.res.TypedArray;import android.graphics.drawable.GradientDrawable;import android.util.AttributeSet;import android.widget.FrameLayout;import com.smarthub.smartmaterial.R;import com.smarthub.smartmaterial.theme.*;
+public class SmartCard extends FrameLayout{
+ private int cardColor,strokeColor;private float cornerRadius=SmartDimensions.CORNER_LARGE,strokeWidth=1f;
+ public SmartCard(Context c){super(c);init(null);}public SmartCard(Context c,AttributeSet a){super(c,a);init(a);}public SmartCard(Context c,AttributeSet a,int s){super(c,a,s);init(a);}
+ private int dp(float v){return SmartDimensions.dp(getContext(),v);}
+ private void init(AttributeSet a){cardColor=SmartTheme.surface(getContext());strokeColor=SmartTheme.isDark(getContext())?SmartDarkColors.OUTLINE:SmartColors.OUTLINE;if(a!=null){TypedArray x=getContext().obtainStyledAttributes(a,R.styleable.SmartCard);cardColor=x.getColor(R.styleable.SmartCard_smartCardColor,cardColor);strokeColor=x.getColor(R.styleable.SmartCard_smartStrokeColor,strokeColor);strokeWidth=x.getDimension(R.styleable.SmartCard_smartStrokeWidth,dp(strokeWidth))/getResources().getDisplayMetrics().density;setElevation(x.getDimension(R.styleable.SmartCard_smartElevation,dp(SmartDimensions.CARD_ELEVATION)));cornerRadius=x.getDimension(R.styleable.SmartCard_smartCornerRadius,dp(cornerRadius))/getResources().getDisplayMetrics().density;x.recycle();}else setElevation(dp(SmartDimensions.CARD_ELEVATION));setPadding(dp(16),dp(16),dp(16),dp(16));updateBackground();}
+ private void updateBackground(){GradientDrawable d=new GradientDrawable();d.setColor(cardColor);d.setCornerRadius(dp(cornerRadius));d.setStroke(dp(strokeWidth),strokeColor);setBackground(d);}
+ public SmartCard setCardColor(int c){cardColor=c;updateBackground();return this;}public SmartCard setStrokeColor(int c){strokeColor=c;updateBackground();return this;}public SmartCard setStrokeWidth(float d){strokeWidth=d;updateBackground();return this;}public SmartCard setCornerRadius(float d){cornerRadius=d;updateBackground();return this;}public SmartCard setCardElevation(float d){setElevation(dp(d));return this;}
 }
