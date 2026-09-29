@@ -16,6 +16,15 @@ public class SmartLinearProgress extends View {
     private float progress = 0f;
     private boolean indeterminate = false;
     private float animatedOffset = 0f;
+    private final Runnable animation = new Runnable() {
+        @Override public void run() {
+            if (!indeterminate || getWindowToken() == null) return;
+            animatedOffset += 0.012f;
+            if (animatedOffset > 1f) animatedOffset = 0f;
+            invalidate();
+            postDelayed(this, 16);
+        }
+    };
 
     public SmartLinearProgress(Context context) { super(context); init(); }
     public SmartLinearProgress(Context context, AttributeSet attrs) { super(context, attrs); init(); }
@@ -26,82 +35,49 @@ public class SmartLinearProgress extends View {
         progressPaint.setColor(SmartColors.PRIMARY);
         trackPaint.setStyle(Paint.Style.FILL);
         progressPaint.setStyle(Paint.Style.FILL);
-        setMinimumHeight(SmartDimensions.dp(getContext(),4));
+        setMinimumHeight(dp(4));
         setIndeterminate(true);
     }
 
+    private int dp(float v) { return SmartDimensions.dp(getContext(), v); }
+
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float radius = getHeight() / 2f;
-        RectF track = new RectF(0, 0, getWidth(), getHeight());
-        canvas.drawRoundRect(track, radius, radius, trackPaint);
-
+        float radius = getHeight()/2f;
+        canvas.drawRoundRect(new RectF(0,0,getWidth(),getHeight()), radius, radius, trackPaint);
         if (indeterminate) {
-            float segmentWidth = getWidth() * 0.35f;
-            float left = animatedOffset * (getWidth() + segmentWidth) - segmentWidth;
-            RectF segment = new RectF(left, 0, left + segmentWidth, getHeight());
-            canvas.drawRoundRect(segment, radius, radius, progressPaint);
+            float segmentWidth = Math.max(dp(24), getWidth()*0.35f);
+            float left = animatedOffset*(getWidth()+segmentWidth)-segmentWidth;
+            canvas.drawRoundRect(new RectF(left,0,left+segmentWidth,getHeight()), radius, radius, progressPaint);
         } else {
-            RectF bar = new RectF(0, 0, getWidth() * progress, getHeight());
-            canvas.drawRoundRect(bar, radius, radius, progressPaint);
+            canvas.drawRoundRect(new RectF(0,0,getWidth()*progress,getHeight()), radius, radius, progressPaint);
         }
     }
 
-    public void setProgress(float value) {
-        progress = Math.max(0f, Math.min(1f, value));
-        indeterminate = false;
-        invalidate();
-    }
-
+    public void setProgress(float value) { progress=Math.max(0f,Math.min(1f,value)); indeterminate=false; removeCallbacks(animation); invalidate(); }
     public float getProgress() { return progress; }
 
     public void setIndeterminate(boolean value) {
-        indeterminate = value;
-        if (value) animateIndeterminate();
-        else { animate().cancel(); invalidate(); }
+        indeterminate=value;
+        removeCallbacks(animation);
+        if (value) post(animation);
+        else invalidate();
     }
 
     public boolean isIndeterminate() { return indeterminate; }
-
-    public SmartLinearProgress setProgressColor(int color) {
-        progressPaint.setColor(color);
-        invalidate();
-        return this;
-    }
-
-    public SmartLinearProgress setTrackColor(int color) {
-        trackPaint.setColor(color);
-        invalidate();
-        return this;
-    }
+    public SmartLinearProgress setProgressColor(int color) { progressPaint.setColor(color); invalidate(); return this; }
+    public SmartLinearProgress setTrackColor(int color) { trackPaint.setColor(color); invalidate(); return this; }
 
     public SmartLinearProgress setBarHeight(float dp) {
-        getLayoutParams().height = SmartDimensions.dp(getContext(), dp);
-        requestLayout();
+        if (getLayoutParams() != null) {
+            getLayoutParams().height=dp(dp);
+            requestLayout();
+        }
         return this;
-    }
-
-    private void animateIndeterminate() {
-        if (!indeterminate) return;
-        animateOffset();
-    }
-
-    private void animateOffset() {
-        if (!indeterminate) return;
-        animate().alpha(1f).setDuration(700).withEndAction(() -> {
-            if (!indeterminate) return;
-            animatedOffset = 1f;
-            invalidate();
-            animate().setDuration(700).withEndAction(() -> {
-                animatedOffset = 0f;
-                invalidate();
-                animateOffset();
-            }).start();
-        }).start();
     }
 
     @Override protected void onDetachedFromWindow() {
-        animate().cancel();
+        removeCallbacks(animation);
         super.onDetachedFromWindow();
     }
 }
