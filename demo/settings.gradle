@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "SmartMaterialDemo"
-include(":app")
+include(":app", ":smartmaterial")
+project(":smartmaterial").projectDir = file("../smartmaterial")
