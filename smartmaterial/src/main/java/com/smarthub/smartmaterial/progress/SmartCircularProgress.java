@@ -22,32 +22,31 @@ public class SmartCircularProgress extends View {
 
     private void init() {
         trackPaint.setStyle(Paint.Style.STROKE);
-        trackPaint.setStrokeWidth(SmartDimensions.dp(getContext(),4));
+        trackPaint.setStrokeWidth(dp(4));
         trackPaint.setColor(SmartColors.SURFACE_VARIANT);
         trackPaint.setStrokeCap(Paint.Cap.ROUND);
-
         progressPaint.setStyle(Paint.Style.STROKE);
-        progressPaint.setStrokeWidth(SmartDimensions.dp(getContext(),4));
+        progressPaint.setStrokeWidth(dp(4));
         progressPaint.setColor(SmartColors.PRIMARY);
         progressPaint.setStrokeCap(Paint.Cap.ROUND);
-
+        setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         setIndeterminate(true);
     }
 
+    private int dp(float v) { return SmartDimensions.dp(getContext(), v); }
+
     @Override protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float cx = getWidth() / 2f;
-        float cy = getHeight() / 2f;
-        float radius = Math.min(getWidth(), getHeight()) / 2f - progressPaint.getStrokeWidth();
+        float cx = getWidth()/2f, cy = getHeight()/2f;
+        float radius = Math.max(0, Math.min(getWidth(), getHeight())/2f - progressPaint.getStrokeWidth());
         canvas.drawCircle(cx, cy, radius, trackPaint);
-
         if (indeterminate) {
             canvas.save();
             canvas.rotate(rotationAngle, cx, cy);
             canvas.drawArc(cx-radius, cy-radius, cx+radius, cy+radius, 0, 110, false, progressPaint);
             canvas.restore();
         } else {
-            canvas.drawArc(cx-radius, cy-radius, cx+radius, cy+radius, -90, progress * 360f, false, progressPaint);
+            canvas.drawArc(cx-radius, cy-radius, cx+radius, cy+radius, -90, progress*360f, false, progressPaint);
         }
     }
 
@@ -62,22 +61,17 @@ public class SmartCircularProgress extends View {
     public void setIndeterminate(boolean value) {
         indeterminate = value;
         if (value) animateRotation();
-        else { animate().cancel(); invalidate(); }
+        else {
+            animate().cancel();
+            rotationAngle = 0f;
+            invalidate();
+        }
     }
 
     public boolean isIndeterminate() { return indeterminate; }
 
-    public SmartCircularProgress setProgressColor(int color) {
-        progressPaint.setColor(color);
-        invalidate();
-        return this;
-    }
-
-    public SmartCircularProgress setTrackColor(int color) {
-        trackPaint.setColor(color);
-        invalidate();
-        return this;
-    }
+    public SmartCircularProgress setProgressColor(int color) { progressPaint.setColor(color); invalidate(); return this; }
+    public SmartCircularProgress setTrackColor(int color) { trackPaint.setColor(color); invalidate(); return this; }
 
     public SmartCircularProgress setStrokeWidth(float dp) {
         float px = SmartDimensions.dp(getContext(), dp);
@@ -88,14 +82,15 @@ public class SmartCircularProgress extends View {
     }
 
     private void animateRotation() {
-        if (!indeterminate) return;
-        rotationAngle = 0f;
-        animate().rotationBy(360f).setDuration(900).withEndAction(this::animateRotation).start();
+        if (!indeterminate || getWindowToken() == null) return;
+        rotationAngle += 8f;
+        if (rotationAngle >= 360f) rotationAngle -= 360f;
         invalidate();
+        postDelayed(this::animateRotation, 16);
     }
 
     @Override protected void onDetachedFromWindow() {
-        animate().cancel();
+        removeCallbacks(this::animateRotation);
         super.onDetachedFromWindow();
     }
 }
