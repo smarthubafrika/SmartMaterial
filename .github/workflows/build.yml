@@ -13,6 +13,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify source revision
+        run: |
+          git rev-parse HEAD
+          git log -1 --oneline
+          echo "SmartProgress.java:"
+          sed -n '30,40p' smartmaterial/src/main/java/com/smarthub/smartmaterial/progress/SmartProgress.java
 
       - name: Set up Java
         uses: actions/setup-java@v5
