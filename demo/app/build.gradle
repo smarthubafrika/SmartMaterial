@@ -1,0 +1,25 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.smarthub.smartmaterial.demo'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.smarthub.smartmaterial.demo'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation project(':smartmaterial')
+}
