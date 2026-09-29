@@ -51,6 +51,11 @@ SmartState.applyRipple(view, SmartColors.PRIMARY, SmartColors.PRIMARY_CONTAINER)
 SmartState.accessible(view, "Open settings");
 ```
 
+
+## Documentation
+
+For the complete installation instructions, component reference, public API examples, theming, accessibility, XML usage, troubleshooting and usage patterns, see the [SmartMaterial User Guide](docs/USER_GUIDE.md).
+
 ## Components
 
 Buttons, icon buttons, cards, text fields, chips, switches, checkboxes, radio buttons, sliders, dropdowns, search bars, badges, progress indicators, dialogs, snackbar, toast, bottom sheets, app bars, navigation bars, navigation rails and FABs are included.
