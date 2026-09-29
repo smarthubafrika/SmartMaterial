@@ -18,6 +18,14 @@ jobs:
           java-version: '17'
 
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.0'
+
+      - name: Verify Gradle
+        run: gradle --version
 
       - name: Build library
         run: gradle :smartmaterial:assembleRelease
+
+      - name: Publish check
+        run: gradle :smartmaterial:publishAllPublicationsToMavenLocalRepository
