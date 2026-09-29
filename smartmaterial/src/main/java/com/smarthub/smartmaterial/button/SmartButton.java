@@ -7,57 +7,15 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.TextView;
-
 import com.smarthub.smartmaterial.R;
 import com.smarthub.smartmaterial.animation.SmartAnimations;
-import com.smarthub.smartmaterial.theme.SmartColors;
-import com.smarthub.smartmaterial.theme.SmartDimensions;
+import com.smarthub.smartmaterial.theme.*;
 
 public class SmartButton extends TextView {
-    private int backgroundColor = SmartColors.PRIMARY;
-    private int textColor = SmartColors.ON_PRIMARY;
-    private float cornerRadius = SmartDimensions.CORNER_MEDIUM;
-
-    public SmartButton(Context context) { super(context); init(null); }
-    public SmartButton(Context context, AttributeSet attrs) { super(context, attrs); init(attrs); }
-    public SmartButton(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); init(attrs); }
-
-    private void init(AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SmartButton);
-            backgroundColor = a.getColor(R.styleable.SmartButton_smartButtonColor, backgroundColor);
-            textColor = a.getColor(R.styleable.SmartButton_smartButtonTextColor, textColor);
-            cornerRadius = a.getDimension(R.styleable.SmartButton_smartCornerRadius, SmartDimensions.dp(getContext(), cornerRadius)) / getResources().getDisplayMetrics().density;
-            a.recycle();
-        }
-        setGravity(Gravity.CENTER);
-        setTextColor(textColor);
-        setTextSize(14);
-        setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD);
-        setMinHeight(SmartDimensions.dp(getContext(), SmartDimensions.BUTTON_HEIGHT));
-        setPadding(SmartDimensions.dp(getContext(),24), 0, SmartDimensions.dp(getContext(),24), 0);
-        setAllCaps(false);
-        setClickable(true);
-        setFocusable(true);
-        setContentDescription(getText());
-        updateBackground();
-    }
-
-    private void updateBackground() {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(backgroundColor);
-        drawable.setCornerRadius(SmartDimensions.dp(getContext(), cornerRadius));
-        setBackground(drawable);
-    }
-
-    public SmartButton setButtonText(CharSequence text) { setText(text); if (getContentDescription() == null) setContentDescription(text); return this; }
-    public SmartButton setButtonColor(int color) { backgroundColor = color; updateBackground(); return this; }
-    public SmartButton setButtonTextColor(int color) { textColor = color; setTextColor(color); return this; }
-    public SmartButton setCornerRadius(float dp) { cornerRadius = dp; updateBackground(); return this; }
-
-    @Override public boolean onTouchEvent(MotionEvent event) {
-        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) SmartAnimations.press(this);
-        if (event.getActionMasked() == MotionEvent.ACTION_UP || event.getActionMasked() == MotionEvent.ACTION_CANCEL) SmartAnimations.release(this);
-        return super.onTouchEvent(event);
-    }
+    private int backgroundColor,textColor,rippleColor; private float cornerRadius=SmartDimensions.CORNER_MEDIUM;
+    public SmartButton(Context c){super(c);init(null);} public SmartButton(Context c,AttributeSet a){super(c,a);init(a);} public SmartButton(Context c,AttributeSet a,int s){super(c,a,s);init(a);}
+    private void init(AttributeSet a){backgroundColor=SmartTheme.primary(getContext());textColor=SmartColors.ON_PRIMARY;rippleColor=SmartColors.PRIMARY_CONTAINER;if(a!=null){TypedArray x=getContext().obtainStyledAttributes(a,R.styleable.SmartButton);backgroundColor=x.getColor(R.styleable.SmartButton_smartButtonColor,backgroundColor);textColor=x.getColor(R.styleable.SmartButton_smartButtonTextColor,textColor);cornerRadius=x.getDimension(R.styleable.SmartButton_smartCornerRadius,dp(cornerRadius))/getResources().getDisplayMetrics().density;rippleColor=x.getColor(R.styleable.SmartButton_smartRippleColor,rippleColor);String cd=x.getString(R.styleable.SmartButton_smartContentDescription);if(cd!=null)setContentDescription(cd);x.recycle();}setGravity(Gravity.CENTER);setTextColor(textColor);setTextSize(14);setTypeface(android.graphics.Typeface.DEFAULT,android.graphics.Typeface.BOLD);setMinHeight(dp(SmartDimensions.BUTTON_HEIGHT));setPadding(dp(24),0,dp(24),0);setAllCaps(false);updateBackground();SmartState.accessible(this,getContentDescription());}
+    private int dp(float v){return SmartDimensions.dp(getContext(),v);} private void updateBackground(){GradientDrawable d=new GradientDrawable();d.setColor(backgroundColor);d.setCornerRadius(dp(cornerRadius));SmartState.applyRipple(this,d,rippleColor);}
+    public SmartButton setButtonText(CharSequence t){setText(t);if(getContentDescription()==null)setContentDescription(t);return this;} public SmartButton setButtonColor(int c){backgroundColor=c;updateBackground();return this;} public SmartButton setButtonTextColor(int c){textColor=c;setTextColor(c);return this;} public SmartButton setRippleColor(int c){rippleColor=c;updateBackground();return this;} public SmartButton setCornerRadius(float d){cornerRadius=d;updateBackground();return this;}
+    @Override public boolean onTouchEvent(MotionEvent e){if(e.getActionMasked()==MotionEvent.ACTION_DOWN)SmartAnimations.press(this);if(e.getActionMasked()==MotionEvent.ACTION_UP||e.getActionMasked()==MotionEvent.ACTION_CANCEL)SmartAnimations.release(this);return super.onTouchEvent(e);}
 }
