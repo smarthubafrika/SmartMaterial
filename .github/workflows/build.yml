@@ -23,7 +23,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '9.7.1'
+          gradle-version: '9.6.0'
+
+      - name: Verify Gradle
+        run: gradle --version
 
       - name: Build library
         run: gradle :smartmaterial:assembleRelease
