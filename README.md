@@ -2,7 +2,7 @@
 
 A small, dependency-free Material 3 inspired Android UI library written in Java.
 
-The first release contains practical, stable UI components with simple APIs. The library uses Android framework APIs only and has no Google Material Components dependency.
+The library uses Android framework APIs only and has no Google Material Components dependency.
 
 ## Requirements
 
@@ -60,13 +60,30 @@ The first release contains practical, stable UI components with simple APIs. The
 
 ## JitPack
 
-    repositories {
-        maven { url = uri("https://jitpack.io") }
+Add JitPack to your root settings.gradle:
+
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+            maven { url 'https://jitpack.io' }
+        }
     }
 
+For the SmartMaterial library module, use:
+
     dependencies {
-        implementation("com.github.smarthubafrika:SmartMaterial:1.0.0")
+        implementation 'com.github.smarthubafrika.SmartMaterial:smartmaterial:1.0.1'
     }
+
+JitPack also supports the repository-level dependency:
+
+    dependencies {
+        implementation 'com.github.smarthubafrika:SmartMaterial:1.0.1'
+    }
+
+The module-specific coordinate is the direct SmartMaterial Android library artifact.
 
 ## Design goal
 
