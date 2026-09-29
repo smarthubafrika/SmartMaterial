@@ -2,7 +2,7 @@ jdk:
   - openjdk17
 
 gradle:
-  version: 9.7.1
+  version: 9.6.0
 
 install:
   - gradle clean build publishToMavenLocal
