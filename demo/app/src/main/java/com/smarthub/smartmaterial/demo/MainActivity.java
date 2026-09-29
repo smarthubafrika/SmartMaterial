@@ -14,6 +14,7 @@ import com.smarthub.smartmaterial.progress.*;
 import com.smarthub.smartmaterial.search.SmartSearchBar;
 import com.smarthub.smartmaterial.slider.SmartSlider;
 import com.smarthub.smartmaterial.switcher.SmartSwitch;
+import com.smarthub.smartmaterial.textfield.SmartTextField;
 import com.smarthub.smartmaterial.theme.SmartColors;
 import com.smarthub.smartmaterial.badge.SmartBadge;
 
