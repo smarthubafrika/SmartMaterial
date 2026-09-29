@@ -43,7 +43,7 @@ public class SmartProgress extends View {
         paint.setStrokeWidth(dp(4));
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        setMinimumHeight(Math.round(dp(24)));
+        setMinimumHeight((int) dp(24));
     }
 
     public SmartProgress setProgress(float value) {
