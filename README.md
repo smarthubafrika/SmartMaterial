@@ -2,7 +2,7 @@
 
 A small, dependency-free Material 3 inspired Android UI library written in Java.
 
-The first release deliberately contains only a few stable components. The goal is reliability, simple APIs and easy use from Android Studio and Sketchware-style Java code.
+The first release contains practical, stable UI components with simple APIs. The library uses Android framework APIs only and has no Google Material Components dependency.
 
 ## Requirements
 
@@ -13,12 +13,35 @@ The first release deliberately contains only a few stable components. The goal i
 
 ## Components
 
+### Core
 - SmartButton
 - SmartCard
 - SmartTextField
 - SmartProgress
 - SmartSnackbar
-- SmartColors and SmartTheme utilities
+- SmartDialog
+- SmartSwitch
+- SmartCheckbox
+- SmartRadioButton
+
+### Surfaces and navigation
+- SmartChip
+- SmartDivider
+- SmartIconButton
+- SmartListItem
+- SmartImageCard
+- SmartBottomSheet
+- SmartTopAppBar
+- SmartTabLayout
+
+### Input
+- SmartDropdown
+- SmartDatePicker
+
+### Theme utilities
+- SmartColors
+- SmartTheme
+- SmartMaterial
 
 ## Quick example
 
@@ -29,7 +52,11 @@ The first release deliberately contains only a few stable components. The goal i
             .setLabel("Name")
             .setHint("Enter your name");
 
-    String value = name.getText();
+    SmartCheckbox terms = new SmartCheckbox(this)
+            .setChecked(false)
+            .setOnCheckedChangeListener((view, checked) -> {
+                // Handle the change.
+            });
 
 ## JitPack
 
