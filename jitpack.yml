@@ -1,8 +1,8 @@
 jdk:
   - openjdk17
 
-gradle:
-  version: 9.6.0
+before_install:
+  - gradle wrapper --gradle-version 9.6.0 --no-daemon
 
 install:
-  - gradle clean build publishToMavenLocal
+  - ./gradlew clean :smartmaterial:build :smartmaterial:publishToMavenLocal --no-daemon
