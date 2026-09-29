@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SmartButton">
+        <attr name="smartButtonColor" format="color"/>
+        <attr name="smartButtonTextColor" format="color"/>
+        <attr name="smartCornerRadius" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="SmartCard">
+        <attr name="smartCardColor" format="color"/>
+        <attr name="smartStrokeColor" format="color"/>
+        <attr name="smartStrokeWidth" format="dimension"/>
+        <attr name="smartElevation" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="SmartTextField">
+        <attr name="smartLabel" format="string"/>
+        <attr name="smartHint" format="string"/>
+        <attr name="smartFillColor" format="color"/>
+        <attr name="smartStrokeColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="SmartProgress">
+        <attr name="smartProgressColor" format="color"/>
+        <attr name="smartTrackColor" format="color"/>
+        <attr name="smartIndeterminate" format="boolean"/>
+    </declare-styleable>
+</resources>
