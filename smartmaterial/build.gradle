@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.smarthubafrika.SmartMaterial'
-version = '1.0.1'
+version = '1.0.2'
 
 android {
     namespace 'com.smarthub.smartmaterial'
@@ -27,15 +27,15 @@ android {
     }
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
                 from components.release
+                groupId = 'com.github.smarthubafrika.SmartMaterial'
+                artifactId = 'smartmaterial'
+                version = '1.0.2'
             }
-            groupId = 'com.github.smarthubafrika.SmartMaterial'
-            artifactId = 'smartmaterial'
-            version = '1.0.1'
         }
     }
 }
