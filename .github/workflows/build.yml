@@ -21,6 +21,3 @@ jobs:
 
       - name: Build library
         run: gradle :smartmaterial:assembleRelease
-
-      - name: Build demo
-        run: gradle -p demo :app:assembleDebug
