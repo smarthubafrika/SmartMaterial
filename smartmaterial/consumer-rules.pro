@@ -1,0 +1,1 @@
+# SmartMaterial consumer rules
