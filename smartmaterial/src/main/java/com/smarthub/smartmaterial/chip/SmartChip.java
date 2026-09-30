@@ -20,6 +20,7 @@ public class SmartChip extends TextView {
         setGravity(Gravity.CENTER);
         setTextSize(14);
         setTextColor(chipTextColor);
+        SmartTheme.medium(this);
         setPadding(dp(16), 0, dp(16), 0);
         setMinHeight(dp(40));
         setClickable(true);
