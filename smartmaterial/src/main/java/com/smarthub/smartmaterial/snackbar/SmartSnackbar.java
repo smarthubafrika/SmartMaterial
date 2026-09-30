@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.smarthub.smartmaterial.theme.SmartTheme;
+
 public final class SmartSnackbar {
     private SmartSnackbar() {}
 
