@@ -2,7 +2,6 @@ package com.smarthub.smartmaterial.button;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
@@ -16,9 +15,12 @@ import com.smarthub.smartmaterial.theme.SmartTheme;
 
 public class SmartButton extends TextView {
 
+    private static final int JITPACK_RED = 0xFFE53935;
+    private static final int JITPACK_GREEN = 0xFF43A047;
+
     private int buttonColor;
     private int textColor;
-    private float radius = 15f;
+    private float radius = 6f;
 
     public SmartButton(Context context) {
         super(context);
@@ -36,37 +38,27 @@ public class SmartButton extends TextView {
     }
 
     private void init() {
-
-        buttonColor = SmartTheme.primary(getContext());
-        textColor = SmartColors.ON_PRIMARY;
+        buttonColor = JITPACK_RED;
+        textColor = 0xFFFFFFFF;
 
         setGravity(Gravity.CENTER);
-
-        // Material-style typography
         setTextSize(14);
         setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         setAllCaps(false);
 
-        // Material button spacing
         int horizontalPadding = dp(16);
         setPadding(horizontalPadding, 0, horizontalPadding, 0);
 
-        // Material button minimum height
-        setMinHeight(dp(48));
-        setMinimumHeight(dp(48));
+        setMinHeight(dp(40));
+        setMinimumHeight(dp(40));
 
         setTextColor(textColor);
 
-        // Click/focus behavior
         setClickable(true);
         setFocusable(true);
+        setElevation(dp(1));
 
-        // Small elevation similar to Material buttons
-        setElevation(dp(2));
-
-        // Rounded Material shape
         setBackground(makeBackground());
-
         setAlpha(1f);
     }
 
@@ -93,15 +85,36 @@ public class SmartButton extends TextView {
         return this;
     }
 
+    public SmartButton setRedButton() {
+        buttonColor = JITPACK_RED;
+        textColor = 0xFFFFFFFF;
+        setTextColor(textColor);
+        setBackground(makeBackground());
+        return this;
+    }
+
+    public SmartButton setGreenButton() {
+        buttonColor = JITPACK_GREEN;
+        textColor = 0xFFFFFFFF;
+        setTextColor(textColor);
+        setBackground(makeBackground());
+        return this;
+    }
+
+    public SmartButton setJitPackRed() {
+        return setRedButton();
+    }
+
+    public SmartButton setJitPackGreen() {
+        return setGreenButton();
+    }
+
     private RippleDrawable makeBackground() {
-
         GradientDrawable base = new GradientDrawable();
-
         base.setShape(GradientDrawable.RECTANGLE);
         base.setColor(buttonColor);
         base.setCornerRadius(dp(radius));
 
-        // Material-style ripple
         ColorStateList rippleColor =
                 new ColorStateList(
                         new int[][] {
@@ -116,11 +129,7 @@ public class SmartButton extends TextView {
                         }
                 );
 
-        return new RippleDrawable(
-                rippleColor,
-                base,
-                null
-        );
+        return new RippleDrawable(rippleColor, base, null);
     }
 
     @Override
@@ -136,13 +145,11 @@ public class SmartButton extends TextView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if (!isEnabled()) {
             return false;
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
             animate()
                     .scaleX(0.98f)
                     .scaleY(0.98f)
@@ -151,7 +158,6 @@ public class SmartButton extends TextView {
 
         } else if (event.getAction() == MotionEvent.ACTION_UP
                 || event.getAction() == MotionEvent.ACTION_CANCEL) {
-
             animate()
                     .scaleX(1f)
                     .scaleY(1f)
