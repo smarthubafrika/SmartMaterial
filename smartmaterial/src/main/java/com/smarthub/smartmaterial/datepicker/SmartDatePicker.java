@@ -153,10 +153,12 @@ public class SmartDatePicker extends TextView {
         for (String name : names) {
             TextView dayName = textView(name, 11, secondaryText);
             dayName.setGravity(Gravity.CENTER);
-            weekdays.addView(dayName, new GridLayout.LayoutParams(
-                    new GridLayout.Spec(GridLayout.UNDEFINED, 1f),
-                    new GridLayout.Spec(GridLayout.UNDEFINED, 1f)
-            ));
+            GridLayout.LayoutParams weekdayParams = new GridLayout.LayoutParams();
+            weekdayParams.width = 0;
+            weekdayParams.height = dp(32);
+            weekdayParams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
+            weekdayParams.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
+            weekdays.addView(dayName, weekdayParams);
         }
         root.addView(weekdays, lp(-1, 32, 0, 0, 0, 0));
 
