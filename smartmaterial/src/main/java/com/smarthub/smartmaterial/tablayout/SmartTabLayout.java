@@ -41,6 +41,7 @@ public class SmartTabLayout extends HorizontalScrollView {
         tab.setSingleLine(true);
         tab.setPadding(dp(16),0,dp(16),0);
         tab.setTextColor(unselectedColor);
+        SmartTheme.medium(tab);
         tab.setBackground(makeTabBackground(false));
         tab.setClickable(true);
         tab.setFocusable(true);
