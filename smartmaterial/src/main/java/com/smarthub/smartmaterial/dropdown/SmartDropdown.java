@@ -26,6 +26,7 @@ public class SmartDropdown extends LinearLayout {
         valueView=new TextView(c);
         valueView.setTextSize(16);
         valueView.setTextColor(SmartTheme.onSurface(c));
+        SmartTheme.light(valueView);
         addView(valueView,new LayoutParams(0,-2,1));
         setBackground(background());
         setOnClickListener(v->showMenu());
@@ -49,6 +50,7 @@ public class SmartDropdown extends LinearLayout {
             item.setText(values.get(i));
             item.setTextSize(16);
             item.setTextColor(SmartTheme.onSurface(getContext()));
+            SmartTheme.light(item);
             item.setGravity(Gravity.CENTER_VERTICAL);
             item.setPadding(dp(16),0,dp(16),0);
             item.setMinHeight(dp(48));
