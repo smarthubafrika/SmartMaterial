@@ -21,6 +21,7 @@ public class SmartImageCard extends FrameLayout {
         title=new TextView(c);
         title.setTextSize(16);
         title.setTextColor(0xFFFFFFFF);
+        SmartTheme.medium(title);
         title.setGravity(Gravity.BOTTOM);
         title.setPadding(dp(16),dp(40),dp(16),dp(14));
         addView(title,new FrameLayout.LayoutParams(-1,dp(80),Gravity.BOTTOM));
