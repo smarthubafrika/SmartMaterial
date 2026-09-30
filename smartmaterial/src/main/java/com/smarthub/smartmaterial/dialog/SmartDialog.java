@@ -36,7 +36,8 @@ public final class SmartDialog {
                 .create();
 
         dialog.setOnShowListener(d -> {
-            TextView titleView = dialog.findViewById(android.R.id.alertTitle);
+            int titleId = dialog.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+            TextView titleView = titleId != 0 ? dialog.findViewById(titleId) : null;
             if (titleView != null) {
                 SmartTheme.bold(titleView);
             }
