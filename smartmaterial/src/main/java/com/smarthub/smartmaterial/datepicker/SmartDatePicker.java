@@ -3,6 +3,7 @@ package com.smarthub.smartmaterial.datepicker;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
@@ -252,7 +253,7 @@ public class SmartDatePicker extends TextView {
                 dayView.setBackground(circleBackground(primary));
             } else if (isToday) {
                 dayView.setTextColor(primary);
-                dayView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                SmartTheme.bold(dayView);
             }
 
             dayView.setOnClickListener(v -> {
