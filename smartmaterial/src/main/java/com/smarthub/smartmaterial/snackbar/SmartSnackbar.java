@@ -27,6 +27,7 @@ public final class SmartSnackbar {
         bar.setText(message);
         bar.setTextColor(Color.WHITE);
         bar.setTextSize(14);
+        SmartTheme.medium(bar);
         bar.setGravity(Gravity.CENTER_VERTICAL);
         bar.setPadding(horizontal, 0, horizontal, 0);
         bar.setBackground(round(Color.rgb(45, 47, 52), dp(anchor, 12)));
