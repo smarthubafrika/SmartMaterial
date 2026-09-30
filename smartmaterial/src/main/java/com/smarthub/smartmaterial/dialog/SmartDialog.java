@@ -3,7 +3,6 @@ package com.smarthub.smartmaterial.dialog;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
@@ -36,7 +35,8 @@ public final class SmartDialog {
                 .create();
 
         dialog.setOnShowListener(d -> {
-            int titleId = dialog.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+            int titleId = dialog.getContext().getResources()
+                    .getIdentifier("alertTitle", "id", "android");
             TextView titleView = titleId != 0 ? dialog.findViewById(titleId) : null;
             if (titleView != null) {
                 SmartTheme.bold(titleView);
@@ -105,7 +105,9 @@ public final class SmartDialog {
                 .create();
 
         dialog.setOnShowListener(d -> {
-            TextView titleView = dialog.findViewById(android.R.id.alertTitle);
+            int titleId = dialog.getContext().getResources()
+                    .getIdentifier("alertTitle", "id", "android");
+            TextView titleView = titleId != 0 ? dialog.findViewById(titleId) : null;
             if (titleView != null) {
                 SmartTheme.bold(titleView);
             }
