@@ -39,7 +39,6 @@ public class SmartTextField extends LinearLayout {
         labelView.setTextColor(SmartTheme.onSurface(context));
         SmartTheme.medium(labelView);
         labelView.setVisibility(GONE);
-        SmartTheme.light(editText);
 
         editText = new EditText(context);
         editText.setTextSize(14);
@@ -48,6 +47,7 @@ public class SmartTextField extends LinearLayout {
         editText.setHintTextColor(Color.rgb(120, 120, 125));
         editText.setGravity(Gravity.CENTER_VERTICAL);
         editText.setPadding(dp(16), 0, dp(16), 0);
+        SmartTheme.light(editText);
         editText.setBackground(makeBackground(fieldColor));
 
         LayoutParams lpLabel = new LayoutParams(
