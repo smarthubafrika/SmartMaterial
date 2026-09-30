@@ -40,6 +40,7 @@ public class SmartDatePicker extends TextView {
 
         setTextSize(16);
         setTextColor(SmartTheme.onSurface(getContext()));
+        SmartTheme.light(this);
         setGravity(Gravity.CENTER_VERTICAL);
         setPadding(dp(16), 0, dp(16), 0);
         setMinHeight(dp(56));
