@@ -4,6 +4,10 @@ A small, dependency-free, Material 3 inspired Android UI library written in Java
 
 SmartMaterial provides reusable Android UI components with a clean API, rounded surfaces, ripple feedback, typography support, light/dark theme utilities, and modern Material-inspired styling — without requiring Google Material Components.
 
+## Current version
+
+**SmartMaterial v1.0.8**
+
 ## Features
 
 - Java-based Android UI library
@@ -248,11 +252,11 @@ dependencyResolutionManagement {
 }
 ```
 
-For the current SmartMaterial release:
+For **SmartMaterial v1.0.8**:
 
 ```gradle
 dependencies {
-    implementation 'com.github.smarthubafrika:SmartMaterial:v1.0.7'
+    implementation 'com.github.smarthubafrika:SmartMaterial:v1.0.8'
 }
 ```
 
@@ -272,6 +276,30 @@ import com.smarthub.smartmaterial.theme.SmartTheme;
 ```
 
 Most components can then be created directly inside an Activity event or More Block.
+
+## What's new in 1.0.8
+
+- Added SmartSearchBar
+- Added SmartBadge
+- Added SmartAvatar
+- Added SmartCircularProgress
+- Added SmartRatingBar
+- Added SmartFAB
+- Added SmartAlert
+- Added SmartTooltip
+- Added SmartConfirmDialog
+- Added SmartEmptyState
+- Added SmartErrorState
+- Added SmartLoadingState
+- Added SmartBottomNavigation
+- Added SmartNavigationDrawer
+- Added SmartSegmentedControl
+- Added SmartFilterChipGroup
+- Added SmartTimeline
+- Added SmartStepper
+- Added SmartPagination
+- Added Google Sans typography assets and automatic theme typography support
+- Included compilation fixes and component stability updates
 
 ## Design goal
 
