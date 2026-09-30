@@ -3,7 +3,6 @@ package com.smarthub.smartmaterial.datepicker;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
@@ -117,14 +116,14 @@ public class SmartDatePicker extends TextView {
         root.setBackground(roundBackground(surface, 20));
 
         TextView title = textView("SELECT DATE", 12, secondaryText);
-        title.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        SmartTheme.bold(title);
         root.addView(title, lp(-1, -2, 0, 0, 0, 8));
 
         LinearLayout monthBar = new LinearLayout(getContext());
         monthBar.setGravity(Gravity.CENTER_VERTICAL);
 
         TextView monthYear = textView("", 18, onSurface);
-        monthYear.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        SmartTheme.bold(monthYear);
         monthBar.addView(monthYear, new LinearLayout.LayoutParams(0, dp(48), 1));
 
         TextView previous = navButton("‹");
@@ -248,7 +247,7 @@ public class SmartDatePicker extends TextView {
 
             if (selected) {
                 dayView.setTextColor(Color.WHITE);
-                dayView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                SmartTheme.bold(dayView);
                 dayView.setBackground(circleBackground(primary));
             } else if (isToday) {
                 dayView.setTextColor(primary);
@@ -280,6 +279,7 @@ public class SmartDatePicker extends TextView {
         view.setText(text);
         view.setTextSize(size);
         view.setTextColor(color);
+        SmartTheme.light(view);
         return view;
     }
 
@@ -293,7 +293,7 @@ public class SmartDatePicker extends TextView {
 
     private TextView actionButton(String text, int color) {
         TextView view = textView(text, 13, color);
-        view.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        SmartTheme.bold(view);
         view.setGravity(Gravity.CENTER);
         view.setPadding(dp(14), 0, dp(14), 0);
         view.setClickable(true);
