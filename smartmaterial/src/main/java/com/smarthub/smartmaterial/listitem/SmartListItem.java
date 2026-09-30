@@ -2,7 +2,6 @@ package com.smarthub.smartmaterial.listitem;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -27,13 +26,14 @@ public class SmartListItem extends LinearLayout {
         titleView = new TextView(context);
         titleView.setTextSize(16);
         titleView.setTextColor(SmartTheme.onSurface(context));
-        titleView.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+        SmartTheme.medium(titleView);
         titleView.setSingleLine(true);
 
         subtitleView = new TextView(context);
         subtitleView.setTextSize(14);
         subtitleView.setTextColor(Color.rgb(105,106,112));
         subtitleView.setSingleLine(true);
+        SmartTheme.light(subtitleView);
         subtitleView.setVisibility(GONE);
 
         addView(titleView,new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
