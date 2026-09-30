@@ -2,7 +2,6 @@ package com.smarthub.smartmaterial.textfield;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -38,8 +37,9 @@ public class SmartTextField extends LinearLayout {
         labelView = new TextView(context);
         labelView.setTextSize(12);
         labelView.setTextColor(SmartTheme.onSurface(context));
-        labelView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        SmartTheme.medium(labelView);
         labelView.setVisibility(GONE);
+        SmartTheme.light(editText);
 
         editText = new EditText(context);
         editText.setTextSize(14);
