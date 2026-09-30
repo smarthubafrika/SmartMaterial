@@ -2,7 +2,6 @@ package com.smarthub.smartmaterial.button;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.util.AttributeSet;
@@ -43,7 +42,7 @@ public class SmartButton extends TextView {
 
         setGravity(Gravity.CENTER);
         setTextSize(14);
-        setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        SmartTheme.medium(this);
         setAllCaps(false);
 
         int horizontalPadding = dp(16);
