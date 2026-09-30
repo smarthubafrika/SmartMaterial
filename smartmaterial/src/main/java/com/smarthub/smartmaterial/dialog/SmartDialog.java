@@ -40,6 +40,7 @@ public final class SmartDialog {
             if (messageView != null) {
                 messageView.setTextColor(SmartTheme.onSurface(context));
                 messageView.setTextSize(16);
+                SmartTheme.light(messageView);
             }
 
             int positiveId = dialog.getContext().getResources()
@@ -47,6 +48,7 @@ public final class SmartDialog {
             View positive = dialog.findViewById(positiveId);
             if (positive instanceof TextView) {
                 ((TextView) positive).setTextColor(SmartTheme.primary(context));
+                SmartTheme.medium((TextView) positive);
                 ((TextView) positive).setAllCaps(false);
             }
         });
@@ -74,6 +76,7 @@ public final class SmartDialog {
             TextView titleView = new TextView(context);
             titleView.setText(title);
             titleView.setTextColor(SmartTheme.onSurface(context));
+            SmartTheme.bold(titleView);
             titleView.setTextSize(20);
             titleView.setGravity(Gravity.CENTER_VERTICAL);
             titleView.setPadding(0, dp(context, 8), 0, dp(context, 8));
