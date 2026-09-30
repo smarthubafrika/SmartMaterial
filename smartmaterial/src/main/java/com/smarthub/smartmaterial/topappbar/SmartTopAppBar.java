@@ -2,7 +2,6 @@ package com.smarthub.smartmaterial.topappbar;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.widget.ImageButton;
@@ -36,7 +35,7 @@ public class SmartTopAppBar extends LinearLayout {
         titleView = new TextView(context);
         titleView.setTextSize(20);
         titleView.setTextColor(SmartTheme.onSurface(context));
-        titleView.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
+        SmartTheme.bold(titleView);
         titleView.setGravity(Gravity.CENTER_VERTICAL);
         titleView.setSingleLine(true);
 
