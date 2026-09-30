@@ -1,93 +1,290 @@
 # SmartMaterial
 
-A small, dependency-free Material 3 inspired Android UI library written in Java.
+A small, dependency-free, Material 3 inspired Android UI library written in Java.
 
-The library uses Android framework APIs only and has no Google Material Components dependency.
+SmartMaterial provides reusable Android UI components with a clean API, rounded surfaces, ripple feedback, typography support, light/dark theme utilities, and modern Material-inspired styling — without requiring Google Material Components.
+
+## Features
+
+- Java-based Android UI library
+- minSdk 23
+- Android framework APIs only
+- No Google Material Components dependency
+- No external runtime UI dependencies
+- Light and dark theme support
+- Built-in Google Sans Light, Medium, and Bold typography
+- Ripple and touch feedback
+- Programmatic UI components
+- Suitable for Android Studio and Sketchware Pro
+- Published through JitPack
 
 ## Requirements
 
-- Java
-- minSdk 23
-- No Google Material Components dependency
-- Android framework APIs only
+- Android project using Java
+- minSdk 23 or higher
+- Android SDK / Android Gradle Plugin compatible with the library
+- JitPack repository for Gradle dependency resolution
 
 ## Components
 
-### Core
+### Buttons and basic controls
+
 - SmartButton
-- SmartCard
-- SmartTextField
-- SmartProgress
-- SmartSnackbar
-- SmartDialog
+- SmartIconButton
+- SmartFAB
 - SmartSwitch
 - SmartCheckbox
 - SmartRadioButton
-
-### Surfaces and navigation
 - SmartChip
-- SmartDivider
-- SmartIconButton
-- SmartListItem
-- SmartImageCard
-- SmartBottomSheet
-- SmartTopAppBar
-- SmartTabLayout
+- SmartBadge
+- SmartSegmentedControl
+- SmartFilterChipGroup
 
-### Input
+### Text and input
+
+- SmartTextField
+- SmartSearchBar
 - SmartDropdown
 - SmartDatePicker
+- SmartRatingBar
+
+### Cards and content
+
+- SmartCard
+- SmartImageCard
+- SmartListItem
+- SmartDivider
+- SmartAvatar
+
+### Feedback and dialogs
+
+- SmartSnackbar
+- SmartDialog
+- SmartConfirmDialog
+- SmartAlert
+- SmartTooltip
+
+### Progress and state
+
+- SmartProgress
+- SmartCircularProgress
+- SmartLoadingState
+- SmartEmptyState
+- SmartErrorState
+
+### Navigation
+
+- SmartTopAppBar
+- SmartBottomNavigation
+- SmartNavigationDrawer
+- SmartTabLayout
+
+### Workflow and data navigation
+
+- SmartTimeline
+- SmartStepper
+- SmartPagination
 
 ### Theme utilities
+
 - SmartColors
 - SmartTheme
 - SmartMaterial
 
 ## Quick example
 
-    SmartButton button = new SmartButton(this).setButtonText("Continue");
-    button.setOnClickListener(v -> SmartSnackbar.show(v, "Button clicked"));
+```java
+SmartButton button = new SmartButton(this)
+        .setButtonText("Continue");
 
-    SmartTextField name = new SmartTextField(this)
-            .setLabel("Name")
-            .setHint("Enter your name");
+button.setOnClickListener(v ->
+        SmartSnackbar.show(v, "Button clicked"));
 
-    SmartCheckbox terms = new SmartCheckbox(this)
-            .setChecked(false)
-            .setOnCheckedChangeListener((view, checked) -> {
-                // Handle the change.
-            });
+SmartTextField name = new SmartTextField(this)
+        .setLabel("Name")
+        .setHint("Enter your name");
+
+SmartSearchBar search = new SmartSearchBar(this);
+
+SmartBadge badge = new SmartBadge(this);
+
+SmartAvatar avatar = new SmartAvatar(this);
+
+SmartCircularProgress progress = new SmartCircularProgress(this);
+progress.setIndeterminate(true);
+```
+
+## Google Sans typography
+
+SmartMaterial includes three Google Sans font assets:
+
+- `google_sans_light.ttf`
+- `google_sans_medium.ttf`
+- `google_sans_bold.ttf`
+
+Typography can be applied through `SmartTheme`:
+
+```java
+SmartTheme.light(textView);
+SmartTheme.medium(textView);
+SmartTheme.bold(textView);
+```
+
+You can also obtain the typefaces directly:
+
+```java
+Typeface light = SmartTheme.getLightTypeface(this);
+Typeface medium = SmartTheme.getMediumTypeface(this);
+Typeface bold = SmartTheme.getBoldTypeface(this);
+```
+
+## Theme
+
+SmartMaterial provides automatic light/dark theme helpers:
+
+```java
+int surface = SmartTheme.surface(this);
+int text = SmartTheme.onSurface(this);
+int primary = SmartTheme.primary(this);
+
+boolean dark = SmartTheme.isDark(this);
+```
+
+Components use the theme utilities where appropriate, so applications can use SmartMaterial without manually styling every component.
+
+## SmartButton
+
+SmartButton includes rounded styling, ripple feedback, press animation, disabled-state handling, and JitPack-inspired red and green button presets.
+
+```java
+SmartButton red = new SmartButton(this)
+        .setButtonText("Delete")
+        .setRedButton();
+
+SmartButton green = new SmartButton(this)
+        .setButtonText("Continue")
+        .setGreenButton();
+
+SmartButton custom = new SmartButton(this)
+        .setButtonText("Custom")
+        .setButtonColor(0xFF3F51B5)
+        .setCornerRadius(8);
+```
+
+## SmartTextField
+
+SmartTextField provides a compact Material-inspired text input with labels, hints, password input, customizable colors, and rounded borders.
+
+```java
+SmartTextField email = new SmartTextField(this)
+        .setLabel("Email")
+        .setHint("Enter your email");
+
+SmartTextField password = new SmartTextField(this)
+        .setLabel("Password")
+        .setHint("Enter your password")
+        .setPassword();
+
+String value = email.getText();
+```
+
+## Dialog example
+
+```java
+SmartDialog.show(
+        this,
+        "Welcome",
+        "This is a SmartMaterial dialog."
+);
+```
+
+For custom dialog content:
+
+```java
+LinearLayout content = new LinearLayout(this);
+content.setOrientation(LinearLayout.VERTICAL);
+
+SmartTextField username = new SmartTextField(this)
+        .setLabel("Username")
+        .setHint("Enter username");
+
+content.addView(username);
+
+SmartDialog.showView(
+        this,
+        "Login",
+        content,
+        "Login",
+        (dialog, which) -> {
+            String user = username.getText();
+        }
+);
+```
+
+## Snackbar example
+
+```java
+SmartSnackbar.show(this.getWindow().getDecorView(), "Saved successfully");
+```
+
+Or attach it to a view:
+
+```java
+SmartSnackbar.show(button, "Saved successfully");
+```
 
 ## JitPack
 
-Add JitPack to your root settings.gradle:
+Add JitPack to your root `settings.gradle`:
 
-    dependencyResolutionManagement {
-        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-        repositories {
-            google()
-            mavenCentral()
-            maven { url 'https://jitpack.io' }
-        }
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
+}
+```
 
-For the SmartMaterial library module, use:
+For the current SmartMaterial release:
 
-    dependencies {
-        implementation 'com.github.smarthubafrika.SmartMaterial:smartmaterial:1.0.1'
-    }
+```gradle
+dependencies {
+    implementation 'com.github.smarthubafrika:SmartMaterial:v1.0.7'
+}
+```
 
-JitPack also supports the repository-level dependency:
+The repository-level coordinate above is the recommended dependency for applications using SmartMaterial.
 
-    dependencies {
-        implementation 'com.github.smarthubafrika:SmartMaterial:1.0.1'
-    }
+## Sketchware Pro
 
-The module-specific coordinate is the direct SmartMaterial Android library artifact.
+SmartMaterial is designed to work with programmatic Android views, making it suitable for Sketchware Pro.
+
+After adding the JitPack dependency, import the components you use. For example:
+
+```java
+import com.smarthub.smartmaterial.button.SmartButton;
+import com.smarthub.smartmaterial.textfield.SmartTextField;
+import com.smarthub.smartmaterial.snackbar.SmartSnackbar;
+import com.smarthub.smartmaterial.theme.SmartTheme;
+```
+
+Most components can then be created directly inside an Activity event or More Block.
 
 ## Design goal
 
-SmartMaterial is Material 3 inspired, not a copy of Google's Material Components. It uses Android framework APIs and keeps the dependency surface small.
+SmartMaterial is Material 3 inspired, not a copy of Google's Material Components.
+
+The library focuses on:
+
+- Simple Java APIs
+- Small dependency surface
+- Reusable programmatic components
+- Consistent styling
+- Modern Android UI patterns
+- Easy integration with Android Studio and Sketchware Pro
 
 ## License
 
