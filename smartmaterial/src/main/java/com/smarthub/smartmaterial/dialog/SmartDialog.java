@@ -36,6 +36,11 @@ public final class SmartDialog {
                 .create();
 
         dialog.setOnShowListener(d -> {
+            TextView titleView = dialog.findViewById(android.R.id.alertTitle);
+            if (titleView != null) {
+                SmartTheme.bold(titleView);
+            }
+
             TextView messageView = dialog.findViewById(android.R.id.message);
             if (messageView != null) {
                 messageView.setTextColor(SmartTheme.onSurface(context));
@@ -99,6 +104,11 @@ public final class SmartDialog {
                 .create();
 
         dialog.setOnShowListener(d -> {
+            TextView titleView = dialog.findViewById(android.R.id.alertTitle);
+            if (titleView != null) {
+                SmartTheme.bold(titleView);
+            }
+
             int positiveId = dialog.getContext().getResources()
                     .getIdentifier("button1", "id", "android");
             View positive = dialog.findViewById(positiveId);
