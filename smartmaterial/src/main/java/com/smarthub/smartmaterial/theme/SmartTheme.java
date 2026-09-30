@@ -7,8 +7,6 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 public final class SmartTheme {
     private static final String FONT_PATH = "fonts/";
 
